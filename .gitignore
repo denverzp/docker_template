@@ -1,4 +1,5 @@
 docker/db/*
 !docker/db/.gitkeep
+docker/nginx/core/default.conf
 docker/nginx/logs/*
 !docker/nginx/logs/.gitkeep
