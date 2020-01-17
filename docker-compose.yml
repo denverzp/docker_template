@@ -19,7 +19,8 @@ services:
             - db    
         depends_on:
             - php
-
+        networks:
+            - internal
 
     db:
         image: mysql:5.7
@@ -35,7 +36,8 @@ services:
             - MYSQL_PASSWORD=${DB_PASS}
         volumes:
             - ./docker/db:/var/lib/mysql
-
+        networks:
+            - internal
 
     php:
         build: ./docker/php
@@ -46,6 +48,8 @@ services:
             - db
         depends_on:
             - db
+        networks:
+            - internal
 
     adminer:
         image: adminer
@@ -55,3 +59,13 @@ services:
             - 8081:8080
         links:
             - db
+        networks:
+            - internal
+
+networks:
+    internal:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 192.168.220.0/28
